@@ -3,9 +3,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-app.use(express.static('build'));
+
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('build'));
 
 morgan.token('data', function(tokens, req, res) {
   return JSON.stringify(req.body);
@@ -46,18 +47,22 @@ let persons = [
   }
 ];
 
-app.get('/info', (req, res) => {
+app.get('/api', (req, res) => {
+  res.send('<h1>Hello World!</h1>');
+});
+
+app.get('/api/info', (req, res) => {
   res.send(
     `<p>Puhelin luettelossa on ${persons.length} henkilöä.</p>
     <p>${new Date()}</p>`
   );
 });
 
-app.get('/persons', (req, res) => {
+app.get('/api/persons', (req, res) => {
   res.json(persons);
 });
 
-app.get('/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id);
   const person = persons.find(note => note.id === id);
   if (person) {
@@ -67,7 +72,7 @@ app.get('/persons/:id', (request, response) => {
   }
 });
 
-app.delete('/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id);
 
   persons = persons.filter(note => note.id !== id);
@@ -80,7 +85,7 @@ const generateId = () => {
   return maxId + 125;
 };
 
-app.post('/persons', (request, response) => {
+app.post('/api/persons', (request, response) => {
   const body = request.body;
 
   if (!body.name) {

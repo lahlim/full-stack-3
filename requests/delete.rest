@@ -1,1 +1,3 @@
-DELETE http://localhost:3001/persons/1
+#DELETE http://localhost:3001/api/persons/1
+
+DELETE https://glacial-escarpment-79004.herokuapp.com/persons/1
