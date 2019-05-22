@@ -1,8 +1,9 @@
 
-#POST http://localhost:3001/api/persons
-POST https://glacial-escarpment-79004.herokuapp.com/api/persons
-Content-Type: application/json
 
+#POST https://glacial-escarpment-79004.herokuapp.com/api/persons
+POST http://localhost:3001/api/persons
+
+Content-Type: application/json
 {
     "name": "Heikki Heikkinen",
     "number": "12345678"
